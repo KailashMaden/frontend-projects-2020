@@ -11,9 +11,11 @@
   visibility: hidden;
   transition: all 0.3s;
 
-  &:target {
-    opacity: 1;
-    visibility: visible;
+  @supports (-webkit-backdrop-filter: blur(10px)) or
+    (backdrop-filter: blur(10px)) {
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: invert(10);
+    background-color: rgba($color-black, 0.3);
   }
 
   &__content {
@@ -27,11 +29,14 @@
     overflow: hidden;
     opacity: 0;
     transform: translate(-50%, -50%) scale(0.25);
-    transition: all 0.5s .2s;
+    transition: all 0.5s 0.2s;
   }
   &__left {
     width: 33.333333%;
     display: table-cell;
+    @include respond(phone) {
+      display: none;
+    }
   }
   &__right {
     width: 66.6666667%;
@@ -86,7 +91,7 @@
       line-height: 1;
     }
 
-    :hover {
+    &:hover {
       color: $color-primary;
     }
   }
